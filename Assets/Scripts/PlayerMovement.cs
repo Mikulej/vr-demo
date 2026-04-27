@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Camera playerCamera;
     Vector3 cameraRotation;
     Rigidbody rb;
+    GameObject interactable = null;
 
     void Start()
     { 
@@ -38,5 +39,18 @@ public class PlayerMovement : MonoBehaviour
 
         transform.localRotation = Quaternion.AngleAxis(cameraRotation.x, Vector3.up);
         playerCamera.transform.localRotation = Quaternion.AngleAxis(cameraRotation.y, Vector3.left);
+    }
+
+    public void OnInteract(InputValue input){
+        if(interactable != null){
+            var door = interactable.GetComponent<FirstDoor>();
+            door.OpenDoor();   
+        }
+    }
+
+    public void OnTriggerEnter(Collider other){
+        if (other.gameObject.tag == "Interactable") {
+             interactable = other.gameObject;
+        }
     }
 }
