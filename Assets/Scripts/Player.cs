@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float mouseSensetivity = 0.5f;
-    [SerializeField] float speed = 500.0f;   
+    [SerializeField] float speed = 300.0f;   
     Vector3 velocity;
     Camera playerCamera;
     Vector3 cameraRotation;
@@ -26,6 +26,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+    }
+
+    private void FixedUpdate(){
         rb.linearVelocity = Quaternion.AngleAxis(cameraRotation.x, Vector3.up) * velocity * speed * Time.deltaTime;
     }
     public void OnJump()
