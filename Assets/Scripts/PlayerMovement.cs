@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float mouseSensetivity = 0.5f;
@@ -9,11 +10,18 @@ public class PlayerMovement : MonoBehaviour
     Vector3 cameraRotation;
     Rigidbody rb;
     GameObject interactableGameObject = null;
+    AudioSource soundEmitter;
+    [SerializeField] AudioClip[] footsteps_leaves = new AudioClip[5];
+    [SerializeField] AudioClip[] footsteps_wood = new AudioClip[5];
+    AudioClip[] footsteps_current;
 
     void Start()
     { 
         playerCamera = GetComponentInChildren<Camera>();
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        soundEmitter = GetComponent<AudioSource>();
+        footsteps_current = footsteps_leaves;
+        StartCoroutine(playFootstepsSounds(0.5f));
     }
 
     void Update()
@@ -51,6 +59,29 @@ public class PlayerMovement : MonoBehaviour
     public void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Interactable") {
              interactableGameObject = other.gameObject;
+        }
+    }
+
+    public void OnCollisionEnter(Collision other){
+        switch(other.gameObject.tag){
+            case "FloorLeaves":{
+                footsteps_current = footsteps_leaves;
+                break;
+            }
+            case "FloorWood":{
+                footsteps_current = footsteps_wood;
+                break;
+            }
+        }
+    }
+
+    private IEnumerator playFootstepsSounds(float waitTime){
+        while(true){
+            if(velocity != Vector3.zero){
+                int r = Random.Range(0,5);
+                soundEmitter.PlayOneShot(footsteps_current[r]);
+            }
+            yield return new WaitForSeconds(waitTime);
         }
     }
 }
