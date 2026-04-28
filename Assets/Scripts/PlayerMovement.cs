@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Camera playerCamera;
     Vector3 cameraRotation;
     Rigidbody rb;
-    GameObject interactable = null;
+    GameObject interactableGameObject = null;
 
     void Start()
     { 
@@ -42,15 +42,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnInteract(InputValue input){
-        if(interactable != null){
-            var door = interactable.GetComponent<FirstDoor>();
-            door.OpenDoor();   
+        if(interactableGameObject != null){
+            var interactable = interactableGameObject.GetComponent<Interactable>();
+            interactable.Interact();   
         }
     }
 
     public void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Interactable") {
-             interactable = other.gameObject;
+             interactableGameObject = other.gameObject;
         }
     }
 }
