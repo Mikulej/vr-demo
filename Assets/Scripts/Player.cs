@@ -92,16 +92,16 @@ public class PlayerMovement : MonoBehaviour
     }
    
     public void OnAttack(){ //Left Click pressed
-        if(potentialCarryItem != null){
-            carryItem = potentialCarryItem;
-            var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
-            carryItemRigidBody.isKinematic = true;
-        }
-        else if(carryItem != null){
+        if(carryItem != null){
             carryItem.transform.position = transform.position + (transform.rotation*Vector3.forward);
             var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
             carryItemRigidBody.isKinematic = false;
             carryItem = null;
+        }
+        else if(potentialCarryItem != null){
+            carryItem = potentialCarryItem;
+            var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
+            carryItemRigidBody.isKinematic = true;
         }
     }
 
