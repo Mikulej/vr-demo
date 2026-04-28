@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider other){
-        
+
         var interactable = other.gameObject.GetComponent<Interactable>();
         if (interactable != null) {
              interactableGameObject = other.gameObject;
@@ -78,18 +78,34 @@ public class PlayerMovement : MonoBehaviour
             potentialCarryItem = pickable.gameObject;
         }
     }
+
+    public void OnTriggerExit(Collider other){
+        var interactable = other.gameObject.GetComponent<Interactable>();
+        if (interactable != null && (interactable.gameObject == interactableGameObject)) {
+             interactableGameObject = null;
+        }
+
+        var pickable = other.gameObject.GetComponent<Pickable>();
+        if(pickable != null && (pickable.gameObject == potentialCarryItem)){
+            potentialCarryItem = null;
+        }
+    }
    
     public void OnAttack(){ //Left Click pressed
-        Debug.Log("Pickup!");
         if(potentialCarryItem != null){
             carryItem = potentialCarryItem;
             var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
             carryItemRigidBody.isKinematic = true;
         }
+        else if(carryItem != null){
+            carryItem.transform.position = transform.position + (transform.rotation*Vector3.forward);
+            var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
+            carryItemRigidBody.isKinematic = false;
+            carryItem = null;
+        }
     }
 
     public void OnThrow(){ //Right click pressed
-        Debug.Log("Throw!");
         if(carryItem != null){
             carryItem.transform.position = transform.position + (transform.rotation*Vector3.forward);
             var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
