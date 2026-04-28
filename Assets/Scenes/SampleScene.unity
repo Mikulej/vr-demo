@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 801470574}
   m_Layer: 0
   m_Name: Apple (1)
-  m_TagString: Pickable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1334,7 +1334,7 @@ GameObject:
   - component: {fileID: 1510748544}
   m_Layer: 0
   m_Name: Apple
-  m_TagString: Pickable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1608,7 +1608,7 @@ GameObject:
   - component: {fileID: 1872425038}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Interactable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

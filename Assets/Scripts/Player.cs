@@ -67,10 +67,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider other){
-        var pickable = other.gameObject.GetComponent<Pickable>();
-        if (other.gameObject.tag == "Interactable") {
+        
+        var interactable = other.gameObject.GetComponent<Interactable>();
+        if (interactable != null) {
              interactableGameObject = other.gameObject;
         }
+
+        var pickable = other.gameObject.GetComponent<Pickable>();
         if(pickable != null){
             potentialCarryItem = pickable.gameObject;
         }
