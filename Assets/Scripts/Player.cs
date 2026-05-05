@@ -5,16 +5,15 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float mouseSensetivity = 0.5f;
     [SerializeField] float speed = 300.0f;   
+    [SerializeField] float raycastRange = 10.0f;  
     Vector3 velocity;
     Camera playerCamera;
     Vector3 cameraRotation;
     Rigidbody rb;
-    GameObject interactableGameObject = null;
     AudioSource soundEmitter;
     [SerializeField] AudioClip[] footsteps_leaves = new AudioClip[5];
     [SerializeField] AudioClip[] footsteps_wood = new AudioClip[5];
     AudioClip[] footsteps_current;
-    GameObject potentialCarryItem;
     GameObject carryItem = null;
 
     void Start()
@@ -60,49 +59,62 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void OnInteract(InputValue input){// E pressed
-        if(interactableGameObject != null){
-            var interactable = interactableGameObject.GetComponent<Interactable>();
-            interactable.Interact();   
+        RaycastHit interactRay;
+        LayerMask mask = LayerMask.GetMask("Raycastable");
+        if(Physics.Raycast(playerCamera.transform.position,playerCamera.transform.forward,out interactRay,raycastRange,mask)){
+            GameObject other = interactRay.transform.gameObject;
+
+            var interactable = other.gameObject.GetComponent<Interactable>();
+            if (interactable != null) {
+                interactable.Interact();
+            }
         }
     }
 
     public void OnTriggerEnter(Collider other){
 
-        var interactable = other.gameObject.GetComponent<Interactable>();
-        if (interactable != null) {
-             interactableGameObject = other.gameObject;
-        }
-
-        var pickable = other.gameObject.GetComponent<Pickable>();
-        if(pickable != null){
-            potentialCarryItem = pickable.gameObject;
-        }
     }
 
     public void OnTriggerExit(Collider other){
-        var interactable = other.gameObject.GetComponent<Interactable>();
-        if (interactable != null && (interactable.gameObject == interactableGameObject)) {
-             interactableGameObject = null;
-        }
 
-        var pickable = other.gameObject.GetComponent<Pickable>();
-        if(pickable != null && (pickable.gameObject == potentialCarryItem)){
-            potentialCarryItem = null;
-        }
     }
    
     public void OnAttack(){ //Left Click pressed
-        if(carryItem != null){
+        RaycastHit interactRay;
+        LayerMask mask = LayerMask.GetMask("Raycastable");
+        if(Physics.Raycast(playerCamera.transform.position,playerCamera.transform.forward,out interactRay,raycastRange,mask)){
+
+            GameObject other = interactRay.transform.gameObject;
+
+            var pickable = other.gameObject.GetComponent<Pickable>();
+            if(pickable != null){
+                if(carryItem != null){//Exchange item
+                    carryItem.transform.position = transform.position + (transform.rotation*Vector3.forward);
+                    var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
+                    carryItemRigidBody.isKinematic = false;
+                    carryItem = null;
+
+                    carryItem = pickable.gameObject;
+                    carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
+                    carryItemRigidBody.isKinematic = true;
+
+                }
+                else{ //Pick up item
+                    carryItem = pickable.gameObject;
+                    var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
+                    carryItemRigidBody.isKinematic = true;
+                }
+            }
+    
+        }
+        else if(carryItem != null){ //Drop item
             carryItem.transform.position = transform.position + (transform.rotation*Vector3.forward);
             var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
             carryItemRigidBody.isKinematic = false;
             carryItem = null;
         }
-        else if(potentialCarryItem != null){
-            carryItem = potentialCarryItem;
-            var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
-            carryItemRigidBody.isKinematic = true;
-        }
+
+
     }
 
     public void OnThrow(){ //Right click pressed
