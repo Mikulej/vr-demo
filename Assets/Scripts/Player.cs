@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         if(Physics.Raycast(playerCamera.transform.position,playerCamera.transform.forward,out interactRay,raycastRange,mask)){
             GameObject other = interactRay.transform.gameObject;
 
-            var interactable = other.gameObject.GetComponent<Interactable>();
+            var interactable = other.gameObject.GetComponentInParent<Interactable>();
             if (interactable != null) {
                 interactable.Interact();
             }

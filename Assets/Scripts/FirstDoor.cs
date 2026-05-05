@@ -3,12 +3,17 @@ using UnityEngine;
 public class FirstDoor : Interactable
 {
     public bool open = true;
+    Animator anim;
+    Animation a;
+    void Start(){
+        anim = GetComponent<Animator>();
+    }
     override public void Interact(){
         if (open){
-            transform.localRotation = Quaternion.AngleAxis(0.0f, Vector3.up);
+            anim.SetTrigger("open");
         }
         else{
-            transform.localRotation = Quaternion.AngleAxis(90.0f, Vector3.up);
+            anim.SetTrigger("close");
         }
         open = !open;
     }
