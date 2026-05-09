@@ -20,10 +20,10 @@ public class Door : Interactable
         }
         else{
             if (open){
-            anim.SetTrigger("open");
+                anim.SetTrigger("close");
             }
             else{
-                anim.SetTrigger("close");
+                anim.SetTrigger("open");
             }
             soundEmitter.PlayOneShot(interactSound);
             open = !open;
