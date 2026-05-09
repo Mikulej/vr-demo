@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     Camera playerCamera;
     Vector3 cameraRotation;
     Rigidbody rb;
-    AudioSource soundEmitter;
+    AudioSource[] soundEmitters = new AudioSource[2];
     [SerializeField] AudioClip[] footsteps_leaves = new AudioClip[5];
     [SerializeField] AudioClip[] footsteps_wood = new AudioClip[5];
     AudioClip[] footsteps_current;
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     { 
         playerCamera = GetComponentInChildren<Camera>();
         rb = GetComponent<Rigidbody>();
-        soundEmitter = GetComponent<AudioSource>();
+        soundEmitters = GetComponents<AudioSource>();
         footsteps_current = footsteps_leaves;
         StartCoroutine(playFootstepsSounds(0.5f));
     }
@@ -131,10 +131,12 @@ public class PlayerMovement : MonoBehaviour
         switch(other.gameObject.tag){
             case "FloorLeaves":{
                 footsteps_current = footsteps_leaves;
+                soundEmitters[1].UnPause();
                 break;
             }
             case "FloorWood":{
                 footsteps_current = footsteps_wood;
+                soundEmitters[1].Pause();
                 break;
             }
         }
@@ -144,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         while(true){
             if(velocity != Vector3.zero){
                 int r = Random.Range(0,5);
-                soundEmitter.PlayOneShot(footsteps_current[r]);
+                soundEmitters[0].PlayOneShot(footsteps_current[r]);
             }
             yield return new WaitForSeconds(waitTime);
         }
