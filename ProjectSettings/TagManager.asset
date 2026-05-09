@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FloorWood
   - FloorLeaves
+  - Apple
   layers:
   - Default
   - TransparentFX

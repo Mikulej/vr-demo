@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FirstDoor : Interactable
+public class Door : Interactable
 {
     public bool open = true;
     [SerializeField] bool locked = false;
