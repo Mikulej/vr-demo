@@ -45,7 +45,14 @@ public class Television : Interactable
                 yield return new WaitForSeconds(1);
             }
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2);
+
+            for(int i = 0; i < 1; i++){
+                if(tvPoweredOn) soundEmitters[1].Play();
+                yield return new WaitForSeconds(1);
+            }
+
+            yield return new WaitForSeconds(6);
         }
     }
 }
