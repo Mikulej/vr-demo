@@ -7,6 +7,7 @@ TagManager:
   - FloorWood
   - FloorLeaves
   - Apple
+  - goblet
   layers:
   - Default
   - TransparentFX
