@@ -12,6 +12,8 @@ public class GobletReset : MonoBehaviour
     [SerializeField] AudioClip lockDoorSound;
     [SerializeField] AudioClip[] gobletSounds = new AudioClip[5];
     [SerializeField] AudioClip[] monsterSounds = new AudioClip[5];
+    [SerializeField] GameObject[] gobletsToReset = new GameObject[3];
+    [SerializeField] GameObject ballsToReset;
     void Start()
     {
         door = roomDoor.GetComponent<Door>();
@@ -21,7 +23,7 @@ public class GobletReset : MonoBehaviour
     {
         if(performingReset == false && resetPossible && playerInside == false && door.isMoving == false && door.open == false){
             door.locked = true;
-            Debug.Log("Goblet Reset!");
+            restartRoom();
             StartCoroutine(GobletResetSequence());
         }
     }
@@ -42,6 +44,7 @@ public class GobletReset : MonoBehaviour
         //Start
         performingReset = true;
         door.soundEmitter.PlayOneShot(lockDoorSound);
+
         //Shenanigans
         yield return new WaitForSeconds(1);
         soundEmitters[0].PlayOneShot(monsterSounds[0]);
@@ -70,6 +73,32 @@ public class GobletReset : MonoBehaviour
         door.Unlock();
         resetPossible = false;
         performingReset = false;
+    }
+
+    private void restartRoom(){
+
+        Quaternion zero = new Quaternion();
+
+        foreach (GameObject gameObjects in gobletsToReset){
+            Goblet[] goblets = gameObjects.GetComponentsInChildren<Goblet>();
+            foreach(Goblet g in goblets){
+                g.TemporaryMute();
+                g.transform.position = g.startPosition;
+                g.transform.rotation = zero;
+                Rigidbody rb = g.GetComponent<Rigidbody>();
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero; 
+            }
+        }
+
+        Ball[] balls = ballsToReset.GetComponentsInChildren<Ball>();
+        foreach(Ball b in balls){
+            b.transform.position = b.startPosition;
+            b.transform.rotation = zero;
+            Rigidbody rb = b.GetComponent<Rigidbody>();
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 
 }
