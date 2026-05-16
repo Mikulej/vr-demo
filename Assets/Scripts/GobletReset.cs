@@ -11,6 +11,7 @@ public class GobletReset : MonoBehaviour
     [SerializeField] AudioSource[] soundEmitters = new AudioSource[3];
     [SerializeField] AudioClip lockDoorSound;
     [SerializeField] AudioClip[] gobletSounds = new AudioClip[5];
+    [SerializeField] AudioClip[] footsteps_wood = new AudioClip[5];
     [SerializeField] AudioClip[] monsterSounds = new AudioClip[5];
     [SerializeField] GameObject[] gobletsToReset = new GameObject[3];
     [SerializeField] GameObject ballsToReset;
@@ -46,14 +47,24 @@ public class GobletReset : MonoBehaviour
         door.soundEmitter.PlayOneShot(lockDoorSound);
 
         //Shenanigans
+        int r;
         yield return new WaitForSeconds(1);
-        soundEmitters[0].PlayOneShot(monsterSounds[0]);
-        yield return new WaitForSeconds(4);
+
+        for(int i = 0; i < 3; i++){
+            r = Random.Range(0,footsteps_wood.Length);
+            soundEmitters[0].PlayOneShot(footsteps_wood[r]);
+            yield return new WaitForSeconds(1);
+        }
+
         soundEmitters[0].PlayOneShot(monsterSounds[1]);
         yield return new WaitForSeconds(2);
-        soundEmitters[1].PlayOneShot(monsterSounds[0]);
-        yield return new WaitForSeconds(4);
-        int r = Random.Range(0,gobletSounds.Length);
+
+        for(int i = 0; i < 3; i++){
+            r = Random.Range(0,footsteps_wood.Length);
+            soundEmitters[1].PlayOneShot(footsteps_wood[r]);
+            yield return new WaitForSeconds(1);
+        }
+        r = Random.Range(0,gobletSounds.Length);
         soundEmitters[2].PlayOneShot(gobletSounds[r]);
         yield return new WaitForSeconds(1);
         r = Random.Range(0,gobletSounds.Length);
@@ -64,8 +75,13 @@ public class GobletReset : MonoBehaviour
         yield return new WaitForSeconds(1);
         soundEmitters[1].PlayOneShot(monsterSounds[3]);
         yield return new WaitForSeconds(2);
-        soundEmitters[1].PlayOneShot(monsterSounds[0]);
-        yield return new WaitForSeconds(4);
+
+           for(int i = 0; i < 3; i++){
+            r = Random.Range(0,footsteps_wood.Length);
+            soundEmitters[1].PlayOneShot(footsteps_wood[r]);
+            yield return new WaitForSeconds(1);
+        }
+
         soundEmitters[0].PlayOneShot(monsterSounds[4]);
         yield return new WaitForSeconds(2);
 

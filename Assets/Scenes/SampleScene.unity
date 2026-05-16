@@ -1299,6 +1299,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9cb9590dfa7edc88b9d2cff73890640b, type: 3}
   - {fileID: 8300000, guid: 197817ccf21f66b2da59c65b29896e53, type: 3}
   - {fileID: 8300000, guid: 0bcdbe57ba4b81968958808b348bb29b, type: 3}
+  footsteps_wood:
+  - {fileID: 8300000, guid: 9c857006464a6173c86d65e586f542e3, type: 3}
+  - {fileID: 8300000, guid: 06a565668efcb16fcbda7775ecea8cd0, type: 3}
+  - {fileID: 8300000, guid: b3be18a32113b1ccfb29fd4badb3db3d, type: 3}
+  - {fileID: 8300000, guid: 23bbf43cbbffcf2c3b7f1290766c3875, type: 3}
+  - {fileID: 8300000, guid: c02e8f90f0ce66c1e8a37842db1f928f, type: 3}
   monsterSounds:
   - {fileID: 8300000, guid: c6e28e9f03d1d008b91ecdf7a358290d, type: 3}
   - {fileID: 8300000, guid: eb3756eb82e00e48f9d5e9085d0d3d6a, type: 3}
