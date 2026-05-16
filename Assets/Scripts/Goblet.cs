@@ -13,11 +13,9 @@ public class Goblet : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision other){
-        //&& other.gameObject.tag != "goblet" && other.gameObject.tag != "table"
         if(canPlaySound ){
             int r = Random.Range(0,hitSounds.Length);
             soundEmitter.PlayOneShot(hitSounds[r]);
-            Debug.Log(other.gameObject.tag);
         }
     }
     void OnCollisionExit(){

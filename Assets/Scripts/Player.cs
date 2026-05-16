@@ -10,11 +10,13 @@ public class PlayerMovement : MonoBehaviour
     Camera playerCamera;
     Vector3 cameraRotation;
     Rigidbody rb;
-    AudioSource[] soundEmitters = new AudioSource[2];
+    AudioSource[] soundEmitters = new AudioSource[3];
     [SerializeField] AudioClip[] footsteps_leaves = new AudioClip[5];
     [SerializeField] AudioClip[] footsteps_wood = new AudioClip[5];
+    [SerializeField] AudioClip throwSound;
     AudioClip[] footsteps_current;
     GameObject carryItem = null;
+    float throwForce = 3000.0f;
 
     void Start()
     { 
@@ -119,11 +121,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnThrow(){ //Right click pressed
         if(carryItem != null){
-            carryItem.transform.position = transform.position + (transform.rotation*Vector3.forward);
+            carryItem.transform.position = playerCamera.transform.position + (transform.rotation*Vector3.forward);
             var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
             carryItemRigidBody.isKinematic = false;
-            carryItemRigidBody.linearVelocity = Quaternion.AngleAxis(cameraRotation.x, Vector3.up)*  Quaternion.AngleAxis(cameraRotation.y, Vector3.left) * Vector3.forward * 2000 * Time.deltaTime;
+            carryItemRigidBody.linearVelocity = Quaternion.AngleAxis(cameraRotation.x, Vector3.up)*  Quaternion.AngleAxis(cameraRotation.y, Vector3.left) * Vector3.forward * throwForce * Time.deltaTime;
             carryItem = null;
+            soundEmitters[2].PlayOneShot(throwSound);
         }
     }   
 
