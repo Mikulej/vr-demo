@@ -616,6 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc806ab14ea0c615bbf455acc4201d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GobletCounter
+  count: 0
 --- !u!1 &40756852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,6 +2056,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2059204093}
+  - {fileID: 901652582}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &203091344
@@ -5846,6 +5848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc806ab14ea0c615bbf455acc4201d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GobletCounter
+  count: 0
 --- !u!1 &785611613
 GameObject:
   m_ObjectHideFlags: 0
@@ -6778,6 +6781,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886729545}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &900290804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900290806}
+  - component: {fileID: 900290805}
+  m_Layer: 0
+  m_Name: WinGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &900290805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900290804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc62bf5843b9f5bc98d79f9d7c4bbcf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GobletClear
+  gobletCounters:
+  - {fileID: 761610403}
+  - {fileID: 33008785}
+  - {fileID: 901652586}
+--- !u!4 &900290806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900290804}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.90693, y: 0, z: 23.03696}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &901652581
 GameObject:
   m_ObjectHideFlags: 0
@@ -6792,7 +6843,7 @@ GameObject:
   - component: {fileID: 901652583}
   - component: {fileID: 901652586}
   m_Layer: 0
-  m_Name: GobletCounter3
+  m_Name: GobletCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6807,11 +6858,11 @@ Transform:
   m_GameObject: {fileID: 901652581}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.4, y: 2.053, z: 21.327}
+  m_LocalPosition: {x: 0.34999, y: -0.074800014, z: 3.10952}
   m_LocalScale: {x: 0.5936942, y: 0.5562614, z: 1.5489265}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 182205193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &901652583
 BoxCollider:
@@ -6903,6 +6954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abc806ab14ea0c615bbf455acc4201d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GobletCounter
+  count: 0
 --- !u!1001 &916058309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19804,7 +19856,7 @@ SceneRoots:
   - {fileID: 154073116}
   - {fileID: 1976044657}
   - {fileID: 494521534}
-  - {fileID: 901652582}
   - {fileID: 94533065}
   - {fileID: 379223575}
   - {fileID: 182205193}
+  - {fileID: 900290806}
