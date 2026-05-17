@@ -76,7 +76,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -120,7 +120,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -178,6 +178,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9cb9590dfa7edc88b9d2cff73890640b, type: 3}
   - {fileID: 8300000, guid: 197817ccf21f66b2da59c65b29896e53, type: 3}
   - {fileID: 8300000, guid: 0bcdbe57ba4b81968958808b348bb29b, type: 3}
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &6899773724721609686
 GameObject:
   m_ObjectHideFlags: 0
