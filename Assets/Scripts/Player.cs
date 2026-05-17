@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] AudioClip throwSound;
     AudioClip[] footsteps_current;
     GameObject carryItem = null;
-    float throwForce = 3000.0f;
+    float throwForce = 2000.0f;
 
     void Start()
     { 
