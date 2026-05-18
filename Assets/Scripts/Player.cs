@@ -84,38 +84,20 @@ public class PlayerMovement : MonoBehaviour
     public void OnAttack(){ //Left Click pressed
         RaycastHit interactRay;
         LayerMask mask = LayerMask.GetMask("Raycastable");
-        if(Physics.Raycast(playerCamera.transform.position,playerCamera.transform.forward,out interactRay,raycastRange,mask)){
 
-            GameObject other = interactRay.transform.gameObject;
-
-            var pickable = other.gameObject.GetComponent<Pickable>();
-            if(pickable != null){
-                if(carryItem != null){//Exchange item
-                    carryItem.transform.position = transform.position + (transform.rotation*Vector3.forward);
-                    var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
-                    carryItemRigidBody.isKinematic = false;
-                    carryItem = null;
-
-                    carryItem = pickable.gameObject;
-                    carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
-                    carryItemRigidBody.isKinematic = true;
-
-                }
-                else{ //Pick up item
-                    carryItem = pickable.gameObject;
-                    var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
-                    carryItemRigidBody.isKinematic = true;
-                }
-            }
-    
-        }
-        else if(carryItem != null){ //Drop item
+        if(carryItem != null){//Drop item
             carryItem.transform.position = transform.position + (transform.rotation*Vector3.forward);
             var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
             carryItemRigidBody.isKinematic = false;
             carryItem = null;
         }
-
+        else if(Physics.Raycast(playerCamera.transform.position,playerCamera.transform.forward,out interactRay,raycastRange,mask)){//Pick up item
+            GameObject other = interactRay.transform.gameObject;
+            var pickable = other.gameObject.GetComponent<Pickable>();
+            carryItem = pickable.gameObject;
+            var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
+            carryItemRigidBody.isKinematic = true;
+        }
 
     }
 
