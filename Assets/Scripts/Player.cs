@@ -27,22 +27,12 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(playFootstepsSounds(0.5f));
         Cursor.lockState = CursorLockMode.Locked;
     }
-
-    void Update()
-    {
-
-    }
-
     private void FixedUpdate(){
         rb.linearVelocity = Quaternion.AngleAxis(cameraRotation.x, Vector3.up) * velocity * speed * Time.deltaTime;
         if(carryItem != null){
             carryItem.transform.position = transform.position + (Quaternion.AngleAxis(cameraRotation.x, Vector3.up) * new Vector3(0.29f,0.4f,0.8f));
             carryItem.transform.rotation = transform.rotation;
         }
-    }
-    public void OnJump()
-    {
-        Debug.Log("Jump!");
     }
 
     public void OnMove(InputValue input)
@@ -73,15 +63,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-    public void OnTriggerEnter(Collider other){
-
-    }
-
-    public void OnTriggerExit(Collider other){
-
-    }
-   
     public void OnAttack(){ //Left Click pressed
         RaycastHit interactRay;
         LayerMask mask = LayerMask.GetMask("Raycastable");
