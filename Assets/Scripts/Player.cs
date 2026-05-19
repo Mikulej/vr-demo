@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         soundEmitters = GetComponents<AudioSource>();
         footsteps_current = footsteps_leaves;
         StartCoroutine(playFootstepsSounds(0.5f));
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
