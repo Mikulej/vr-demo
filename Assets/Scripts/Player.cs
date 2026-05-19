@@ -95,9 +95,11 @@ public class PlayerMovement : MonoBehaviour
         else if(Physics.Raycast(playerCamera.transform.position,playerCamera.transform.forward,out interactRay,raycastRange,mask)){//Pick up item
             GameObject other = interactRay.transform.gameObject;
             var pickable = other.gameObject.GetComponent<Pickable>();
-            carryItem = pickable.gameObject;
-            var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
-            carryItemRigidBody.isKinematic = true;
+            if(pickable != null){
+                carryItem = pickable.gameObject;
+                var carryItemRigidBody = carryItem.GetComponent<Rigidbody>();
+                carryItemRigidBody.isKinematic = true;
+            }
         }
 
     }
